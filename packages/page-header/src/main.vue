@@ -13,18 +13,18 @@
 </template>
 
 <script>
-import { t } from "element-ui/src/locale";
+import { t } from 'element-ui/src/locale';
 export default {
-  name: "ElPageHeader",
+  name: 'ElPageHeader',
 
   props: {
     title: {
       type: String,
       default() {
-        return t("el.pageHeader.title");
-      },
+        return t('el.pageHeader.title');
+      }
     },
-    content: String,
-  },
+    content: String
+  }
 };
 </script>

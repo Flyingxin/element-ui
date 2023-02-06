@@ -132,7 +132,6 @@
         }
         return ret;
       },
-      // 获取父组件elform的this完全实例
       form() {
         let parent = this.$parent;
         let parentName = parent.$options.componentName;
@@ -145,7 +144,6 @@
         }
         return parent;
       },
-      // 获取表单域属性值(prop)
       fieldValue() {
         const model = this.form.model;
         if (!model || !this.prop) { return; }
@@ -154,6 +152,7 @@
         if (path.indexOf(':') !== -1) {
           path = path.replace(/:/, '.');
         }
+
         return getPropByPath(model, path, true).v;
       },
       isRequired() {
@@ -233,7 +232,7 @@
         this.validateMessage = '';
 
         let model = this.form.model;
-        let value = this.fieldValue; //表单域prop属性值
+        let value = this.fieldValue;
         let path = this.prop;
         if (path.indexOf(':') !== -1) {
           path = path.replace(/:/, '.');
@@ -262,7 +261,7 @@
 
         const prop = getPropByPath(formRules, this.prop || '');
         formRules = formRules ? (prop.o[this.prop || ''] || prop.v) : [];
-        // 连接两个，或多个数组
+
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },
       getFilteredRule(trigger) {

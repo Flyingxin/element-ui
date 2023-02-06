@@ -31,9 +31,11 @@
     cursor: pointer;
     font-size: 13px;
 
-    &:hover {
+    &:active {
       color: $--color-primary;
+    }
 
+    &:hover {
       &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
         border-color: $--input-focus-border;
       }

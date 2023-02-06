@@ -1,6 +1,7 @@
 <template>
   <div
     @dragstart.prevent
+    @mousewheel.prevent="handleNumberChange"
     :class="[
       'el-input-number',
       inputNumberSize ? 'el-input-number--' + inputNumberSize : '',
@@ -41,7 +42,8 @@
       @blur="handleBlur"
       @focus="handleFocus"
       @input="handleInput"
-      @change="handleInputChange">
+      @change="handleInputChange"
+      >
     </el-input>
   </div>
 </template>
@@ -264,6 +266,20 @@
       },
       select() {
         this.$refs.input.select();
+      },
+      // 鼠标滚动改变数值 --新增
+      handleNumberChange(e) {
+        if (this.inputNumberDisabled) return;
+        const value = this.value || 0;
+        if (e.deltaY > 0) {
+          if (this.maxDisabled) return;
+          const newVal = this._increase(value, this.step);
+          this.setCurrentValue(newVal);
+        } else {
+          if (this.minDisabled) return;
+          const newVal = this._decrease(value, this.step);
+          this.setCurrentValue(newVal);
+        }
       }
     },
     mounted() {

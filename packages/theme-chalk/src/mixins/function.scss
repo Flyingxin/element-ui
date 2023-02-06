@@ -2,15 +2,27 @@
 
 /* BEM support Func
  -------------------------- */
+
+
+ // 字符化
 @function selectorToString($selector) {
   $selector: inspect($selector);
+  /** str-slice 
+    /* 从 $string 中截取子字符串，通过 $start-at 和 $end-at 
+    /* 设置始末位置，未指定结束索引值则默认截取到字符串末尾。
+    /* 这里主要是去除第一个字符和最后一个字符,避免如 --el, el：等的干扰
+  **/
   $selector: str-slice($selector, 2, -2);
   @return $selector;
 }
 
+ //  是否包含--
 @function containsModifier($selector) {
   $selector: selectorToString($selector);
-
+  /** str-index($string, $substring)
+    /* 返回一个下标，标示 $substring 在 $string 中的起始位置。没有找到的话，则返回 null 值。
+    /* $modifier-specarator --
+  **/
   @if str-index($selector, $modifier-separator) {
     @return true;
   } @else {
@@ -18,16 +30,18 @@
   }
 }
 
+ //  是否包含is-
 @function containWhenFlag($selector) {
   $selector: selectorToString($selector);
-
+  /** $state-prefix: 'is-'; **/
   @if str-index($selector, '.' + $state-prefix) {
-    @return true
+    @return true 
   } @else {
     @return false
   }
 }
 
+ //  是否包含:
 @function containPseudoClass($selector) {
   $selector: selectorToString($selector);
 
@@ -38,6 +52,7 @@
   }
 }
 
+/** 对上述四种情况进行判断，有一种存在就返回true **/
 @function hitAllSpecialNestRule($selector) {
 
   @return containsModifier($selector) or containWhenFlag($selector) or containPseudoClass($selector);

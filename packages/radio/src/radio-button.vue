@@ -1,5 +1,4 @@
 <template>
-  <!-- 与radio类似 -->
   <label
     class="el-radio-button"
     :class="[
@@ -14,7 +13,6 @@
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="value = isDisabled ? value : label"
   >
-    <!-- 被隐藏的input，单选框button不需要圆圈 -->
     <input
       class="el-radio-button__orig-radio"
       :value="label"
@@ -28,14 +26,11 @@
       @blur="focus = false"
       autocomplete="off"
     >
-    <!-- 真实显示出的按钮 -->
     <span
       class="el-radio-button__inner"
       :style="value === label ? activeStyle : null"
       @keydown.stop>
-      <!-- 如果有文字，则出现在插槽中 -->
       <slot></slot>
-      <!-- 如果没有文字，则显示label值 -->
       <template v-if="!$slots.default">{{label}}</template>
     </span>
   </label>
@@ -87,7 +82,6 @@
         }
         return false;
       },
-      // 选中单选框样式变化
       activeStyle() {
         return {
           backgroundColor: this._radioGroup.fill || '',
@@ -107,7 +101,7 @@
       },
       tabIndex() {
         return (this.isDisabled || (this._radioGroup && this.value !== this.label)) ? -1 : 0;
-      } 
+      }
     },
 
     methods: {

@@ -65,24 +65,37 @@
   }
 }
 
-/* BEM
+/* BEM  
  -------------------------- */
+ // 混入el 
+   /* 假如 $block为button */
+   /* 编译后为.el-button */
 @mixin b($block) {
   $B: $namespace+'-'+$block !global;
-
+  // 为scss变量插值
   .#{$B} {
     @content;
   }
 }
-
+// 混入__
 @mixin e($element) {
+  /**假设$element为disabled **/
   $E: $element !global;
   $selector: &;
   $currentSelector: "";
+  /** 遍历$element //可能有多个
+  /* $B 为 mixin b()混入中的变量名
+  /* 这里使用$B是因为在element组件样式中e的混入必定是在b混入下的
+  /* 如果是在el-button下使用e混入,则生成 .el-button__disabled
+  **/
   @each $unit in $element {
     $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit + ","};
   }
-
+  /** hitAllSpecialNestRule 判断$elector是否包含--, is-, 在function.scc 中定义
+  /* 这里判断是否包含is--,--是因为使用了 @at-root
+  /* @at-root指令可以使一个或多个规则被限定输出在文档的根层级上，而不是被嵌套在其父选择器下
+  /* 包含有is--等前缀的样式名,在组件中一般是可移除的,所以在输出在文档的根层级上时要加上父选择器
+  **/
   @if hitAllSpecialNestRule($selector) {
     @at-root {
       #{$selector} {
@@ -99,7 +112,12 @@
     }
   }
 }
-
+// 混入--
+   /** 
+   /* 该方法与混入e基本相同,不同的是没有判断hitAllSpecialNestRule
+   /* 因为混入 -- 一般的是组件的尺寸样式,如 el-radio--medium,el-radio--small等,父选择器一般为el-radio等,
+   /* 故不需要判断
+   **/
 @mixin m($modifier) {
   $selector: &;
   $currentSelector: "";
@@ -107,7 +125,7 @@
     $currentSelector: #{$currentSelector + & + $modifier-separator + $unit + ","};
   }
 
-  @at-root {
+  @at-root { 
     #{$currentSelector} {
       @content;
     }
@@ -161,7 +179,7 @@
     }
   }
 }
-
+ //  添加前缀.is-
 @mixin when($state) {
   @at-root {
     &.#{$state-prefix + $state} {

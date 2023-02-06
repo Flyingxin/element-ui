@@ -17,11 +17,8 @@
       }
     ]"
   >
-    <!-- 加载按钮 -->
     <i class="el-icon-loading" v-if="loading"></i>
-    <!-- 图标 -->
     <i :class="icon" v-if="icon && !loading"></i>
-    <!-- 按钮组下的按钮中放置i标签图标 -->
     <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>

@@ -16,7 +16,7 @@
     @mouseleave="hovering = false"
   >
     <template v-if="type !== 'textarea'">
-      <!-- 前置元素 一般放置前缀（http://）、按钮-->
+      <!-- 前置元素 -->
       <div class="el-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </div>
@@ -39,7 +39,7 @@
         @change="handleChange"
         :aria-label="label"
       >
-      <!-- 前置内容 图标-->
+      <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
         <i class="el-input__icon"
@@ -47,44 +47,39 @@
            :class="prefixIcon">
         </i>
       </span>
-      <!-- 后置内容 图标-->
+      <!-- 后置内容 -->
       <span
         class="el-input__suffix"
         v-if="getSuffixVisible()">
         <span class="el-input__suffix-inner">
           <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix"></slot>
-            <!-- 后置内容图标 -->
             <i class="el-input__icon"
               v-if="suffixIcon"
               :class="suffixIcon">
             </i>
           </template>
-          <!-- 清空图标  .prevent为阻止默认事件-->
           <i v-if="showClear"
             class="el-input__icon el-icon-circle-close el-input__clear"
             @mousedown.prevent
             @click="clear"
           ></i>
-          <!-- 密码是否可见图标 -->
           <i v-if="showPwdVisible"
             class="el-input__icon el-icon-view el-input__clear"
             @click="handlePasswordVisible"
           ></i>
-          <!-- 字数限制图标 -->
           <span v-if="isWordLimitVisible" class="el-input__count">
             <span class="el-input__count-inner">
               {{ textLength }}/{{ upperLimit }}
             </span>
           </span>
         </span>
-        <!-- 表单校验图标 -->
         <i class="el-input__icon"
           v-if="validateState"
           :class="['el-input__validateIcon', validateIcon]">
         </i>
       </span>
-      <!-- 后置元素 一般放置后缀（.com）、按钮-->
+      <!-- 后置元素 -->
       <div class="el-input-group__append" v-if="$slots.append">
         <slot name="append"></slot>
       </div>
@@ -142,7 +137,7 @@
         textareaCalcStyle: {},
         hovering: false,
         focused: false,
-        isComposing: false, //是否合成
+        isComposing: false,
         passwordVisible: false
       };
     },
@@ -210,8 +205,8 @@
       validateIcon() {
         return {
           validating: 'el-icon-loading',
-          success: 'el-icon-circle-check', 
-          error: 'el-icon-circle-close' 
+          success: 'el-icon-circle-check',
+          error: 'el-icon-circle-close'
         }[this.validateState];
       },
       textareaStyle() {
@@ -307,12 +302,10 @@
           }
         };
       },
-      // 先处理输入框失去焦点函数，再表单验证
       handleBlur(event) {
         this.focused = false;
         this.$emit('blur', event);
         if (this.validateEvent) {
-          // 找到对应的父组件，调用$emit事件来实现事件分发
           this.dispatch('ElFormItem', 'el.form.blur', [this.value]);
         }
       },
@@ -320,7 +313,6 @@
         this.getInput().select();
       },
       resizeTextarea() {
-        // 如果是运行在服务端则返回
         if (this.$isServer) return;
         const { autosize, type } = this;
         if (type !== 'textarea') return;

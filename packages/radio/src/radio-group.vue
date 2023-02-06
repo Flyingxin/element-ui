@@ -1,5 +1,4 @@
 <template>
-  <!-- 自定义组件 is决定渲染哪个组件 -->
   <component
     :is="_elTag"
     class="el-radio-group"
@@ -56,7 +55,7 @@
     created() {
       this.$on('handleChange', value => {
         this.$emit('change', value);
-      }); 
+      });
     },
     mounted() {
       // 当radioGroup没有默认选项时，第一个可以选中Tab导航
@@ -73,14 +72,12 @@
         const radios = this.$el.querySelectorAll(className);
         const length = radios.length;
         const index = [].indexOf.call(radios, target);
-        const roleRadios = this.$el.querySelectorAll('[role=radio]'); //默认已经添加该属性，无需手动添加
+        const roleRadios = this.$el.querySelectorAll('[role=radio]');
         switch (e.keyCode) {
           case keyCode.LEFT:
           case keyCode.UP:
             e.stopPropagation();
             e.preventDefault();
-            //如果是第一个触发按钮，则跑道最后一个
-            //如果不是第一个触发按钮，则index索引值减1触发（上一个按钮触发）
             if (index === 0) {
               roleRadios[length - 1].click();
               roleRadios[length - 1].focus();
@@ -91,7 +88,6 @@
             break;
           case keyCode.RIGHT:
           case keyCode.DOWN:
-            //同理
             if (index === (length - 1)) {
               e.stopPropagation();
               e.preventDefault();

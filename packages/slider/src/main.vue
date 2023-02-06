@@ -8,7 +8,6 @@
     :aria-orientation="vertical ? 'vertical': 'horizontal'"
     :aria-disabled="sliderDisabled"
   >
-    <!-- 计数器 -->
     <el-input-number
       v-model="firstValue"
       v-if="showInput && !range"
@@ -23,26 +22,22 @@
       :debounce="debounce"
       :size="inputSize">
     </el-input-number>
-    <!-- 真实滑动栏 -->
     <div
       class="el-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"
       ref="slider">
-      <!-- 已划过进度条 -->
       <div
         class="el-slider__bar"
         :style="barStyle">
       </div>
-      <!-- 第一个按钮值 -->
       <slider-button
         :vertical="vertical"
         v-model="firstValue"
         :tooltip-class="tooltipClass"
         ref="button1">
       </slider-button>
-      <!-- 第二个按钮值 -->
       <slider-button
         :vertical="vertical"
         v-model="secondValue"
@@ -50,7 +45,6 @@
         ref="button2"
         v-if="range">
       </slider-button>
-      <!-- 间断点 -->
       <div
         class="el-slider__stop"
         v-for="(item, key) in stops"
@@ -58,7 +52,6 @@
         :style="getStopStyle(item)"
         v-if="showStops">
       </div>
-      <!-- 间断点特殊样式等的插槽 -->
       <template v-if="markList.length > 0">
         <div>
           <div
@@ -70,8 +63,7 @@
         </div>
         <div class="el-slider__marks">
           <slider-marker
-            v-for="(item, key) in markList"
-            :mark="item.mark"
+            :mark="item.mark" v-for="(item, key) in markList"
             :key="key"
             :style="getStopStyle(item.position)">
           </slider-marker>
@@ -151,7 +143,6 @@
       height: {
         type: String
       },
-      //输入时的去抖延迟，毫秒，仅在show-input等于true时有效
       debounce: {
         type: Number,
         default: 300
@@ -220,7 +211,6 @@
     },
 
     methods: {
-      // 监测value是否改变，返回布尔值
       valueChanged() {
         if (this.range) {
           return ![this.minValue, this.maxValue]
@@ -235,10 +225,9 @@
           return;
         }
         const val = this.value;
-        // 有范围的滑动栏
         if (this.range && Array.isArray(val)) {
           if (val[1] < this.min) {
-            this.$emit('input', [this.min, this.min]); //传value出去
+            this.$emit('input', [this.min, this.min]);
           } else if (val[0] > this.max) {
             this.$emit('input', [this.max, this.max]);
           } else if (val[0] < this.min) {
@@ -253,9 +242,7 @@
               this.oldValue = val.slice();
             }
           }
-        }
-        //从0开始的滑动栏
-         else if (!this.range && typeof val === 'number' && !isNaN(val)) {
+        } else if (!this.range && typeof val === 'number' && !isNaN(val)) {
           if (val < this.min) {
             this.$emit('input', this.min);
           } else if (val > this.max) {
@@ -269,7 +256,7 @@
           }
         }
       },
-      // 滑动栏按钮根据就近原则，跳转到该值
+
       setPosition(percent) {
         const targetValue = this.min + percent * (this.max - this.min) / 100;
         if (!this.range) {
@@ -282,10 +269,9 @@
         } else {
           button = this.firstValue > this.secondValue ? 'button1' : 'button2';
         }
-        // 滑动栏按钮跳转
         this.$refs[button].setPosition(percent);
       },
-      // 鼠标点击滑动栏
+
       onSliderClick(event) {
         if (this.sliderDisabled || this.dragging) return;
         this.resetSize();
@@ -298,13 +284,13 @@
         }
         this.emitChange();
       },
-      // 重置进度条的尺寸
+
       resetSize() {
         if (this.$refs.slider) {
           this.sliderSize = this.$refs.slider[`client${ this.vertical ? 'Height' : 'Width' }`];
         }
       },
-      // DOM更新后再渲染一次value
+
       emitChange() {
         this.$nextTick(() => {
           this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
@@ -317,7 +303,6 @@
     },
 
     computed: {
-      // 间断点数
       stops() {
         if (!this.showStops || this.min > this.max) return [];
         if (this.step === 0) {
@@ -331,7 +316,6 @@
         for (let i = 1; i < stopCount; i++) {
           result.push(i * stepWidth);
         }
-        // 筛选出不在value值范围内的间断点，为之后遍历渲染css样式
         if (this.range) {
           return result.filter(step => {
             return step < 100 * (this.minValue - this.min) / (this.max - this.min) ||
@@ -341,7 +325,7 @@
           return result.filter(step => step > 100 * (this.firstValue - this.min) / (this.max - this.min));
         }
       },
-      // 在value范围内的刻度值列表
+
       markList() {
         if (!this.marks) {
           return [];
@@ -365,19 +349,19 @@
       maxValue() {
         return Math.max(this.firstValue, this.secondValue);
       },
-      // 进度条百分比
+
       barSize() {
         return this.range
           ? `${ 100 * (this.maxValue - this.minValue) / (this.max - this.min) }%`
           : `${ 100 * (this.firstValue - this.min) / (this.max - this.min) }%`;
       },
-      // 进度条开始的地方
+
       barStart() {
         return this.range
           ? `${ 100 * (this.minValue - this.min) / (this.max - this.min) }%`
           : '0%';
       },
-      // 返回各个元素小数点精确到第几位
+
       precision() {
         let precisions = [this.min, this.max, this.step].map(item => {
           let decimal = ('' + item).split('.')[1];
@@ -389,7 +373,7 @@
       runwayStyle() {
         return this.vertical ? { height: this.height } : {};
       },
-      // 滑动栏value区域样式
+
       barStyle() {
         return this.vertical
           ? {
@@ -400,14 +384,13 @@
             left: this.barStart
           };
       },
-      // 禁用
+
       sliderDisabled() {
         return this.disabled || (this.elForm || {}).disabled;
       }
     },
 
     mounted() {
-      // firstValue、secondValue、oldValue进行初始化
       let valuetext;
       if (this.range) {
         if (Array.isArray(this.value)) {

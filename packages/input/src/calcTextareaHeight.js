@@ -46,7 +46,7 @@ function calculateNodeStyling(targetElement) {
   const contextStyle = CONTEXT_STYLE
     .map(name => `${name}:${style.getPropertyValue(name)}`)
     .join(';');
- 
+
   return { contextStyle, paddingSize, borderSize, boxSizing };
 }
 

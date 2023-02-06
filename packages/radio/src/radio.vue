@@ -6,7 +6,7 @@
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
-      { 'is-checked': model === label },
+      { 'is-checked': model === label }
     ]"
     role="radio"
     :aria-checked="model === label"
@@ -14,17 +14,13 @@
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
-    <!-- 第一个span代表模拟的圆形按钮 -->
-    <span
-      class="el-radio__input"
+    <span class="el-radio__input"
       :class="{
         'is-disabled': isDisabled,
-        'is-checked': model === label,
+        'is-checked': model === label
       }"
     >
-      <!-- 模拟圆圈 -->
       <span class="el-radio__inner"></span>
-      <!-- input才是真正的radio按钮，不过被隐藏了opacity:0，会触发点击事件，none/visible/hidden是触发不了点击事件的 -->
       <input
         ref="radio"
         class="el-radio__original"
@@ -39,109 +35,100 @@
         :disabled="isDisabled"
         tabindex="-1"
         autocomplete="off"
-      />
+      >
     </span>
-    <!-- 第二个span代表文字部分 -->
     <span class="el-radio__label" @keydown.stop>
-      <!-- 如果有文字，则出现在slot中 -->
       <slot></slot>
-      <!-- 如果没有，显示label值 -->
-      <template v-if="!$slots.default">{{ label }}</template>
+      <template v-if="!$slots.default">{{label}}</template>
     </span>
   </label>
 </template>
 <script>
-import Emitter from "element-ui/src/mixins/emitter";
+  import Emitter from 'element-ui/src/mixins/emitter';
 
-export default {
-  name: "ElRadio",
+  export default {
+    name: 'ElRadio',
 
-  mixins: [Emitter],
-  inject: {
-    elForm: {
-      default: "",
-    },
+    mixins: [Emitter],
 
-    elFormItem: {
-      default: "",
-    },
-  },
+    inject: {
+      elForm: {
+        default: ''
+      },
 
-  componentName: "ElRadio",
-
-  props: {
-    value: {},
-    label: {},
-    disabled: Boolean,
-    name: String,
-    border: Boolean,
-    size: String,
-  },
-
-  data() {
-    return {
-      focus: false,
-    };
-  },
-  computed: {
-    isGroup() {
-      let parent = this.$parent;
-      while (parent) {
-        if (parent.$options.componentName !== "ElRadioGroup") {
-          parent = parent.$parent;
-        } else {
-          this._radioGroup = parent;
-          return true;
-        }
+      elFormItem: {
+        default: ''
       }
-      return false;
     },
-    model: {
-      get() {
-        return this.isGroup ? this._radioGroup.value : this.value;
-      },
-      set(val) {
-        if (this.isGroup) {
-          this.dispatch("ElRadioGroup", "input", [val]);
-        } else {
-          this.$emit("input", val);
-        }
-        this.$refs.radio &&
-          (this.$refs.radio.checked = this.model === this.label);
-      },
-    },
-    _elFormItemSize() {
-      return (this.elFormItem || {}).elFormItemSize;
-    },
-    radioSize() {
-      const temRadioSize =
-        this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
-      return this.isGroup
-        ? this._radioGroup.radioGroupSize || temRadioSize
-        : temRadioSize;
-    },
-    isDisabled() {
-      return this.isGroup
-        ? this._radioGroup.disabled ||
-            this.disabled ||
-            (this.elForm || {}).disabled
-        : this.disabled || (this.elForm || {}).disabled;
-    },
-    tabIndex() {
-      return this.isDisabled || (this.isGroup && this.model !== this.label)
-        ? -1
-        : 0;
-    },
-  },
 
-  methods: {
-    handleChange() {
-      this.$nextTick(() => {
-        this.$emit("change", this.model);
-        this.isGroup &&
-          this.dispatch("ElRadioGroup", "handleChange", this.model);
-      });
+    componentName: 'ElRadio',
+
+    props: {
+      value: {},
+      label: {},
+      disabled: Boolean,
+      name: String,
+      border: Boolean,
+      size: String
     },
-  },
-};
+
+    data() {
+      return {
+        focus: false
+      };
+    },
+    computed: {
+      isGroup() {
+        let parent = this.$parent;
+        while (parent) {
+          if (parent.$options.componentName !== 'ElRadioGroup') {
+            parent = parent.$parent;
+          } else {
+            this._radioGroup = parent;
+            return true;
+          }
+        }
+        return false;
+      },
+      model: {
+        get() {
+          return this.isGroup ? this._radioGroup.value : this.value;
+        },
+        set(val) {
+          if (this.isGroup) {
+            this.dispatch('ElRadioGroup', 'input', [val]);
+          } else {
+            this.$emit('input', val);
+          }
+          this.$refs.radio && (this.$refs.radio.checked = this.model === this.label);
+        }
+      },
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+      radioSize() {
+        const temRadioSize = this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+        return this.isGroup
+          ? this._radioGroup.radioGroupSize || temRadioSize
+          : temRadioSize;
+      },
+      isDisabled() {
+        return this.isGroup
+          ? this._radioGroup.disabled || this.disabled || (this.elForm || {}).disabled
+          : this.disabled || (this.elForm || {}).disabled;
+      },
+      tabIndex() {
+        return (this.isDisabled || (this.isGroup && this.model !== this.label)) ? -1 : 0;
+      }
+    },
+
+    methods: {
+      handleChange() {
+        this.$nextTick(() => {
+          this.$emit('change', this.model);
+          this.isGroup && this.dispatch('ElRadioGroup', 'handleChange', this.model);
+        });
+      }
+    }
+  };
 </script>

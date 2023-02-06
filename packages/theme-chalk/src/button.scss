@@ -5,6 +5,7 @@
 @import "mixins/utils";
 
 @include b(button) {
+  // el-button
   display: inline-block;
   line-height: 1;
   white-space: nowrap;
