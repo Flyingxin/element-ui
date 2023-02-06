@@ -3,28 +3,34 @@
 
 @include b(page-header) {
   display: flex;
-  line-height: 24px;
+  line-height: 18px;
 
   @include e(left) {
     display: flex;
     cursor: pointer;
-    margin-right: 40px;
+    margin-right: 25px;
     position: relative;
-
-    &::after {
-      content: "";
-      position: absolute;
-      width: 1px;
-      height: 16px;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: $--border-color-base;
-    }
 
     .el-icon-back {
       font-size: 18px;
-      margin-right: 6px;
+      align-self: center;
+    }
+
+    @include e(title) {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  @include e(right) {
+    display: flex;
+    cursor: pointer;
+    margin-right: 25px;
+    position: absolute;
+    right: 0%;
+
+    .el-icon-arrow-right {
+      font-size: 18px;
       align-self: center;
     }
 
@@ -35,7 +41,20 @@
   }
 
   @include e(content) {
+    margin-left: 15px;
     font-size: 18px;
     color: $--color-text-primary;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 3px;
+      height: 18px;
+      left: -15%;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: $--border-color-base;
+    }
   }
 }
