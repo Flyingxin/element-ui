@@ -3,15 +3,15 @@
 </p>
 
 
-<div><span style="fontSize:16px;fontWeight:700">@description:</span>由于项目开发时遇到element-ui组件库无法满足的需求，于是开启了修改源码之旅</div>
-<div><span style="fontSize:16px;fontWeight:700">@time:</span>2023-02-04 0:51</div>
-<div><span style="fontSize:16px;fontWeight:700">@author:</span>cyx</div>
+<div><span style="font-size:16px;font-weight:700;">@description:</span>由于项目开发时遇到element-ui组件库无法满足的需求,于是开启了修改源码之旅</div>
+<div><span style="font-size:16px;font-weight:700;">@time:</span>2023-02-04 0:51</div>
+<div><span style="font-size:16px;font-weight:700;">@author:</span>cyx</div>
 
 <dl>
     <dt>编译环境:</dt>
-    <dd>element-ui <span style="fontWeight:700">v2.15.12</span></dd>
-    <dd>node       <span style="fontWeight:700">v14.14.0</span></dd>
-    <dd>npm        <span style="fontWeight:700">v6.14.8</span></dd>
+    <dd>element-ui <span style="font-weight:700;">v2.15.12</span></dd>
+    <dd>node       <span style="font-weight:700;">v14.14.0</span></dd>
+    <dd>npm        <span style="font-weight:700;">v6.14.8</span></dd>
 </dl>
 
 <h4>若和我同样修改element-ui源码想法的朋友们，欢迎和我互相探讨qq702609592</h4>
