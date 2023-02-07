@@ -28,6 +28,7 @@
     >
     <span
       class="el-radio-button__inner"
+      :class="{'is-textColor': istextColor}"
       :style="value === label ? activeStyle : null"
       @keydown.stop>
       <slot></slot>
@@ -101,6 +102,10 @@
       },
       tabIndex() {
         return (this.isDisabled || (this._radioGroup && this.value !== this.label)) ? -1 : 0;
+      },
+      // 判断是否有自定义颜色，有则关闭文字hover触发的颜色,存在不触发，不存在触发
+      istextColor() {
+        return this._radioGroup.textColor ? 0 : 1;
       }
     },
 

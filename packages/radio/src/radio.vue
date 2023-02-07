@@ -1,4 +1,4 @@
-<template>
+ <template>
   <label
     class="el-radio"
     :class="[
@@ -14,13 +14,16 @@
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
+    <!-- 模拟的圆形按钮 -->
     <span class="el-radio__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
       }"
     >
+      <!-- 模拟的圆圈 -->
       <span class="el-radio__inner"></span>
+      <!-- 真实radio，但是被隐藏了opacity -->
       <input
         ref="radio"
         class="el-radio__original"
@@ -37,6 +40,7 @@
         autocomplete="off"
       >
     </span>
+    <!-- 文字部分 -->
     <span class="el-radio__label" @keydown.stop>
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>

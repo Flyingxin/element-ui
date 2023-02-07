@@ -28,8 +28,11 @@
 
     @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, 0);
 
-    &:hover {
-      color: $--color-primary;
+
+    @include when(textColor) {
+      &:hover{
+        color: $--color-primary;
+      }
     }
 
     & [class*="el-icon-"] {
@@ -107,7 +110,4 @@
     }
   }
 
-  &:focus:not(.is-focus):not(:active):not(.is-disabled){ /*获得焦点时 样式提醒*/
-    box-shadow: 0 0 2px 2px $--radio-button-checked-border-color;
-  }
 }

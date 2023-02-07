@@ -67,12 +67,26 @@
     },
     methods: {
       handleKeydown(e) { // 左右上下按键 可以在radio组内切换不同选项
-        const target = e.target;
-        const className = target.nodeName === 'INPUT' ? '[type=radio]' : '[role=radio]';
-        const radios = this.$el.querySelectorAll(className);
+        var radios = [];
+        var roleRadios = [];
+        const className = e.target.nodeName === 'INPUT' ? '[type=radio]' : '[role=radio]';
+        const radiosAll = this.$el.querySelectorAll(className);
+        // 去除含有disabled属性的radio/radio-button
+        radiosAll.forEach(item => {
+          if (className === '[type=radio]' && !item.getAttribute('disabled') ||
+              className === '[role=radio]' && !item.classList.contains('is-disabled')) {
+            radios.push(item);
+          }
+        });
         const length = radios.length;
-        const index = [].indexOf.call(radios, target);
-        const roleRadios = this.$el.querySelectorAll('[role=radio]');
+        const index = [].indexOf.call(radios, e.target);
+        const roleRadiosAll = this.$el.querySelectorAll('[role=radio]');
+        // 去除含有disabled属性的radio-button
+        roleRadiosAll.forEach(item => {
+          if (!item.classList.contains('is-disabled')) {
+            roleRadios.push(item);
+          }
+        });
         switch (e.keyCode) {
           case keyCode.LEFT:
           case keyCode.UP:
