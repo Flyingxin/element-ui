@@ -1,4 +1,4 @@
-<p align="center">
+<p align="center" style="margin-top: 20px;">
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
 
@@ -16,17 +16,12 @@
 
 <h4>若和我同样修改element-ui源码想法的朋友们，欢迎和我互相探讨qq702609592</h4>
 
-
-# 修改源码步骤
+# 使用
 <ol>
-    <li>git下载源码包 `https://github.com/ElemeFE/element.git`</li>
-    <li>安装node配置环境,配置环境变量,可自行查百度安装配置. 注: 版本过高或者过低可能导致下载依赖出现问题</li>
-    <li>进入源码根目录，使用终端or命令提示窗口开启下载依赖命令 `npm i`</li>
-    <li>修改源码,vue组件源码在package中，一个文件对应一个组件,css源码在在package中theme-chalk/src下</li>
-    <li>检查错误，在根目录使用终端or命令提示窗口,开启检查命令 `npm run dev`</li>
-    <li>打包,在根目录使用终端or命令提示窗口,开启打包命令 `npm run dist`</li>
-    <li>使用，打包成功后会获得lib文件夹，在根目录下,将lib复制到对应项目的/node_modules/element-ui下替换lib</li>
-    <li>重新编译对应项目即可实现效果</li>
+    <li><h4>下载解压该文件，将文件夹命名为elemnt-ui并复制<h4></li>
+    <li><h4>粘贴并替换项目中`/node_modules/`下的element-ui 文件夹，并重新运行项目即可<h4</li>
+    <li>若未找到element-ui文件，则先在项目根目录终端npm install element-ui@2.15.12下载依赖</li>
+    <li>下载成功后,再重复①②即可</li>
 </ol>
 
 
@@ -57,3 +52,23 @@
     <p>② 修复边框颜色与填充色不一致bug</p>
     <p>③ 修复键盘事件下，禁用按钮仍会被选中bug</p>
     <p>④ 优化鼠标触发（:hover）设置文字颜色之后不触发hover，反之触发element-ui默认色</p>
+
+# el-carousel
+- No.5  `time:2023-02-09 23:17`
+    <p>① type新增`rotate`模式</p>
+    <p>② 新增多种特效，如抽屉式、旋转式、翻转式、渐变式等</p>
+    <p>③ rotate模式下支持不高于6张广告的走马灯</p>
+    <p>④ 已经修复，目前rotate模式下支持定时切换功能</p>
+
+# 修改源码步骤
+<ol>
+    <li>git下载源码包 `https://github.com/ElemeFE/element.git`</li>
+    <li>安装node配置环境,配置环境变量,可自行查百度安装配置. 注: 版本过高或者过低可能导致下载依赖出现问题</li>
+    <li>进入源码根目录，使用终端or命令提示窗口开启下载依赖命令 `npm i`</li>
+    <li>修改源码,vue组件源码在package中，一个文件对应一个组件,css源码在在package中theme-chalk/src下</li>
+    <li>检查错误，在根目录使用终端or命令提示窗口,开启检查命令 `npm run dev`</li>
+    <li>打包,在根目录使用终端or命令提示窗口,开启打包命令 `npm run dist`</li>
+    <li>使用，打包成功后会获得lib文件夹，在根目录下,将lib复制到对应项目的/node_modules/element-ui下替换lib</li>
+    <li>重新编译对应项目即可实现效果</li>
+</ol>
+
