@@ -14,7 +14,14 @@
 
   @include e(container) {
     position: relative;
+    //  type:rotate时开启3d走马灯
+    transform-style: preserve-3d;
+    width: 80%;
     height: 300px;
+    margin: 0 auto;
+    transform: rotateY(0deg);
+    transition: all 2s;
+
   }
 
   @include e(arrow) {

@@ -3,11 +3,13 @@
     :class="carouselClasses"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave">
+    <!-- 组件容器 -->
     <div
       class="el-carousel__container"
-      :style="{ height: height }">
+      :style="{ height: height , transform: `rotateY(${rotate}deg)`}">
+      <!-- 左按钮 -->
       <transition
-        v-if="arrowDisplay"
+        v-if="arrowDisplay && type !== 'rotate'"
         name="carousel-arrow-left">
         <button
           type="button"
@@ -19,8 +21,9 @@
           <i class="el-icon-arrow-left"></i>
         </button>
       </transition>
+      <!-- 右按钮 -->
       <transition
-        v-if="arrowDisplay"
+        v-if="arrowDisplay && type !== 'rotate'"
         name="carousel-arrow-right">
         <button
           type="button"
@@ -32,8 +35,10 @@
           <i class="el-icon-arrow-right"></i>
         </button>
       </transition>
+      <!-- 卡片插槽 -->
       <slot></slot>
     </div>
+    <!-- 走马灯外部显示指示器 -->
     <ul
       v-if="indicatorPosition !== 'none'"
       :class="indicatorsClasses">
@@ -55,6 +60,7 @@
 </template>
 
 <script>
+// throttle 节流函数 （下一次函数执行与上一次函数执行的时间间隔，控制在一定范围内）
 import throttle from 'throttle-debounce/throttle';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
@@ -104,38 +110,40 @@ export default {
 
   data() {
     return {
-      items: [],
+      items: [], // 所有子元素
       activeIndex: -1,
       containerWidth: 0,
       timer: null,
-      hover: false
+      hover: false,
+      rotate: 0 // rotate模式下开启
     };
   },
 
   computed: {
+    // 切换箭头显示时机
     arrowDisplay() {
       return this.arrow !== 'never' && this.direction !== 'vertical';
     },
-
+    // 指示器有label时->显示label
     hasLabel() {
       return this.items.some(item => item.label.toString().length > 0);
     },
-
+    // 走马灯类名
     carouselClasses() {
       const classes = ['el-carousel', 'el-carousel--' + this.direction];
-      if (this.type === 'card') {
-        classes.push('el-carousel--card');
+      if (this.type === 'card' || 'rotate') {
+        classes.push(`el-carousel--${this.type}`);
       }
       return classes;
     },
-
+    // 指示器类名
     indicatorsClasses() {
       const classes = ['el-carousel__indicators', 'el-carousel__indicators--' + this.direction];
       if (this.hasLabel) {
         classes.push('el-carousel__indicators--labels');
       }
-      if (this.indicatorPosition === 'outside' || this.type === 'card') {
-        classes.push('el-carousel__indicators--outside');
+      if (this.indicatorPosition === 'outside' || (this.type === 'card' || 'rotate')) {
+        classes.push('el-carousel__indicators--outside'); // 走马灯外面显示
       }
       return classes;
     }
@@ -145,22 +153,22 @@ export default {
     items(val) {
       if (val.length > 0) this.setActiveItem(this.initialIndex);
     },
-
+    // 改变
     activeIndex(val, oldVal) {
       this.resetItemPosition(oldVal);
       if (oldVal > -1) {
         this.$emit('change', val, oldVal);
       }
     },
-
+    // 自动播放
     autoplay(val) {
       val ? this.startTimer() : this.pauseTimer();
     },
-
+    // 循环播放
     loop() {
       this.setActiveItem(this.activeIndex);
     },
-
+    // 间隔
     interval() {
       this.pauseTimer();
       this.startTimer();
@@ -168,16 +176,21 @@ export default {
   },
 
   methods: {
+    // 更新items的所有子元素item
+    updateItems() {
+      this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
+    },
+    // 鼠标进入
     handleMouseEnter() {
       this.hover = true;
       this.pauseTimer();
     },
-
+    // 鼠标离开
     handleMouseLeave() {
       this.hover = false;
       this.startTimer();
     },
-
+    // 中央显示的item
     itemInStage(item, index) {
       const length = this.items.length;
       if (index === length - 1 && item.inStage && this.items[0].active ||
@@ -189,7 +202,7 @@ export default {
       }
       return false;
     },
-
+    // 侧边两边item某一边触发hover
     handleButtonEnter(arrow) {
       if (this.direction === 'vertical') return;
       this.items.forEach((item, index) => {
@@ -205,11 +218,7 @@ export default {
         item.hover = false;
       });
     },
-
-    updateItems() {
-      this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
-    },
-
+    // 重置item
     resetItemPosition(oldIndex) {
       this.items.forEach((item, index) => {
         item.translateItem(index, this.activeIndex, oldIndex);
@@ -217,10 +226,14 @@ export default {
     },
 
     playSlides() {
-      if (this.activeIndex < this.items.length - 1) {
+      const length = this.items.length;
+      if (this.activeIndex < length - 1) {
         this.activeIndex++;
       } else if (this.loop) {
         this.activeIndex = 0;
+      }
+      if (this.type === 'rotate') {
+        this.rotate -= Math.floor(360 / length);
       }
     },
 
@@ -240,8 +253,9 @@ export default {
       this.pauseTimer();
       this.startTimer();
     },
-
+    //  设置激活的item的索引值
     setActiveItem(index) {
+      //  为string是 传入的是幻灯片的名字name
       if (typeof index === 'string') {
         const filteredItems = this.items.filter(item => item.name === index);
         if (filteredItems.length > 0) {
@@ -255,6 +269,9 @@ export default {
       }
       let length = this.items.length;
       const oldIndex = this.activeIndex;
+      if (this.type === 'rotate' && this.activeIndex !== -1) {
+        this.rotate += (oldIndex - index) * Math.floor(360 / length);
+      }
       if (index < 0) {
         this.activeIndex = this.loop ? length - 1 : 0;
       } else if (index >= length) {
@@ -267,21 +284,32 @@ export default {
       }
       this.resetTimer();
     },
-
+    // 切换到上一张卡片的索引值
     prev() {
       this.setActiveItem(this.activeIndex - 1);
     },
-
+    // 切换到下一张卡片的索引值
     next() {
       this.setActiveItem(this.activeIndex + 1);
     },
 
     handleIndicatorClick(index) {
+      if (this.type === 'rotate' && this.activeIndex !== -1) {
+        const length = this.items.length;
+        const oldIndex = this.activeIndex;
+        this.rotate += (oldIndex - index) * Math.floor(360 / length);
+      }
       this.activeIndex = index;
+
     },
 
     handleIndicatorHover(index) {
       if (this.trigger === 'hover' && index !== this.activeIndex) {
+        if (this.type === 'rotate' && this.activeIndex !== -1) {
+          const length = this.items.length;
+          const oldIndex = this.activeIndex;
+          this.rotate += (oldIndex - index) * Math.floor(360 / length);
+        }
         this.activeIndex = index;
       }
     }

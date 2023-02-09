@@ -35,6 +35,21 @@
         z-index: #{$--index-normal + 1};
       }
     }
+    @include m(rotate) {
+      width: 100%;
+      transition: transform .4s ease-in-out;
+      &.is-in-stage {
+        cursor: pointer;
+        z-index: $--index-normal;
+        &:hover .el-carousel__mask,
+        &.is-hover .el-carousel__mask {
+          opacity: 0.12;
+        }
+      }
+      &.is-active {
+        z-index: #{$--index-normal + 1};
+      }
+    }
   }
 
   @include e(mask) {
