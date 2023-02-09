@@ -18,8 +18,8 @@
 
 # 使用
 <ol>
-    <li><h4>下载解压该文件，将文件夹命名为elemnt-ui并复制<h4></li>
-    <li><h4>粘贴并替换项目中`/node_modules/`下的element-ui 文件夹，并重新运行项目即可<h4</li>
+    <li>下载解压该文件，将文件夹命名为elemnt-ui并复制</li>
+    <li>粘贴并替换项目中`/node_modules/`下的element-ui 文件夹，并重新运行项目即可</li>
     <li>若未找到element-ui文件，则先在项目根目录终端npm install element-ui@2.15.12下载依赖</li>
     <li>下载成功后,再重复①②即可</li>
 </ol>
