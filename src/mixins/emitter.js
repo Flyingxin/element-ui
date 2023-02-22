@@ -11,11 +11,9 @@ function broadcast(componentName, eventName, params) {
 }
 export default {
   methods: {
-    //找到对应的父组件，调用$emit事件来实现事件分发
     dispatch(componentName, eventName, params) {
       var parent = this.$parent || this.$root;
       var name = parent.$options.componentName;
-      
 
       while (parent && (!name || name !== componentName)) {
         parent = parent.$parent;
