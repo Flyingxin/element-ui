@@ -80,8 +80,9 @@ import { ElInfiniteScroll } from './infinite-scroll'
 import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 import { ElDrawer } from './drawer'
-
 import { ElStatistic } from './statistic'
+
+import { ElQrcode } from './qrcode'
 
 export interface InstallationOptions {
   locale: any,
@@ -725,3 +726,6 @@ export class DescriptionsItem extends ElDescriptionsItem {}
 
 /** Result Component */
 export class Result extends ElResult {}
+
+/** Qrcode Component */
+export class Qrcode extends ElQrcode {}
