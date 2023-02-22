@@ -1,4 +1,4 @@
-<p align="center" style="margin-top: 20px;">
+<p align="center" style="margin-top:50px;">
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
 
@@ -59,6 +59,20 @@
     <p>② 新增多种特效，如抽屉式、旋转式、翻转式、渐变式等</p>
     <p>③ rotate模式下支持不高于6张广告的走马灯</p>
     <p>④ 已经修复，目前rotate模式下支持定时切换功能</p>
+
+# el-qrcode
+- No.6 `time:2023-02-22 21:24`
+        <table border="1" rules="all"  width="600px">
+            <thead><th colspan="3">二维码组件</th></thead>
+            <tbody>
+            <tr><td>src</td> <td>内容(必填)</td> <td>String</td></tr>
+            <tr><td>color</td> <td>颜色,支持十六进制</td> <td>String</td></tr>
+            <tr><td>logoSrc</td> <td>logo图片,必须用require导入，例如require('xxx')</td> <td>String</td></tr>
+            <tr><td>size</td> <td>尺寸，默认50px</td> <td>Number</td></tr>
+            <tr><td>borderMargin</td> <td>二维码外边距，默认10px</td> <td>Number</td></tr>
+            <tr><td>logoMargin</td> <td>logo外边距，默认3px</td> <td>Number</td></tr>
+            </tbody>
+        </table>
 
 # 修改源码步骤
 <ol>
