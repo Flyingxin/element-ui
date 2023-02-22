@@ -63,7 +63,7 @@
 # el-qrcode
 - No.6 `time:2023-02-22 21:24`
         <table border="1" rules="all"  width="600px">
-            <thead><th colspan="3">二维码组件</th></thead>
+            <thead><th colspan="3" center>二维码组件</th></thead>
             <tbody>
             <tr><td>src</td> <td>内容(必填)</td> <td>String</td></tr>
             <tr><td>color</td> <td>颜色,支持十六进制</td> <td>String</td></tr>
