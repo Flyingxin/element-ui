@@ -80,16 +80,16 @@
         <table border="1" rules="all"  width="700px">
             <thead><th colspan="3" center>数字滚动组件</th></thead>
             <tbody>
-            <tr><td>value</td> <td>数值(必填)</td><td>-</td><td>Number</td></tr>
-            <tr><td>delay</td> <td>延迟时间(必填，单位ms)</td><td>-</td> <td>Number</td></tr>
-            <tr><td>color</td> <td>颜色,支持十六进制</td><td>-</td> <td>String</td></tr>
-            <tr><td>size</td> <td>字体大小，默认14px</td><td>small/large</td> <td>String</td></tr>
-            <tr><td>bold</td> <td>字体加粗</td><td>-</td> <td>Boolean</td></tr>
-            <tr><td>hover</td> <td>鼠标经过触发文字阴影</td><td>-</td> <td>Boolean</td></tr>
-            <tr><td>boder</td> <td>边框</td><td>-</td> <td>Boolean</td></tr>
-            <tr><td>icon</td> <td>图标</td><td>-/</td> <td>String</td></tr>
-            <tr><td>iconSize</td> <td>图标尺寸大小</td><td>-/</td> <td>Number</td></tr>
-            <tr><td>iconColor</td> <td>图标颜色，不写默认和字体颜色一致，支持十六进制</td><td>-/</td> <td>String</td></tr>
+            <tr><td>value</td> <td>数值(必填)</td><td>Number</td></tr>
+            <tr><td>delay</td> <td>延迟时间(必填，单位ms)</td> <td>Number</td></tr>
+            <tr><td>color</td> <td>颜色，支持primaryblack/success/warning/danger/info</td> <td>String</td></tr>
+            <tr><td>size</td> <td>字体大小，默认14px,支持small/large</td> <td>String</td></tr>
+            <tr><td>bold</td> <td>字体加粗</td> <td>Boolean</td></tr>
+            <tr><td>hover</td> <td>鼠标经过触发文字阴影</td> <td>Boolean</td></tr>
+            <tr><td>boder</td> <td>边框</td> <td>Boolean</td></tr>
+            <tr><td>icon</td> <td>图标</td> <td>String</td></tr>
+            <tr><td>iconSize</td> <td>图标尺寸大小</td><td></td> <td>Number</td></tr>
+            <tr><td>iconColor</td> <td>图标颜色，不写默认和字体颜色一致，支持十六进制</td> <td>String</td></tr>
             </tbody>
         </table>
 # 修改源码步骤
