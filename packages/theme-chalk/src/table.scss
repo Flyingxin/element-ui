@@ -14,7 +14,6 @@
   background-color: $--color-white;
   font-size: 14px;
   color: $--table-font-color;
-
   // 数据为空
   @include e(empty-block) {
     min-height: 60px;

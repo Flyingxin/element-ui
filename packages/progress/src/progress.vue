@@ -18,7 +18,7 @@
       <div class="el-progress-bar__outer" :style="{height: strokeWidth + 'px', backgroundColor:defineBackColor}">
         <div class="el-progress-bar__inner" :style="{width: percentage + '%'}">
           <!-- 新增动画特效标签 -->
-          <div class="el-progress-bar__bar" :class="{'is-transform': transform}" :style="barStyle">
+          <div class="el-progress-bar__bar" :class="{'is-transition': transition}" :style="barStyle">
             <div class="el-progress-bar__innerText" :style="{color:textColor}" v-if="showText && textInside">{{content}}</div>  
           </div>
           <div class="el-progress-bar__animation" v-if="animation" :style="{height: strokeWidth + 'px'}" ></div>
@@ -108,7 +108,7 @@
         type: Boolean,
         default: false
       },
-      transform: {
+      transition: {
         type: Boolean,
         default: false
       },

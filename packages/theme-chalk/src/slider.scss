@@ -88,6 +88,10 @@
     border-top-left-radius: $--slider-border-radius;
     border-bottom-left-radius: $--slider-border-radius;
     position: absolute;
+
+    @include when(transition){
+      transition: all 0.6s ease;
+    }
   }
 
   @include e(button-wrapper) {
