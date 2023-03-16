@@ -88,7 +88,7 @@
             <tr><td>hover</td> <td>鼠标经过触发文字阴影</td> <td>Boolean</td></tr>
             <tr><td>boder</td> <td>边框</td> <td>Boolean</td></tr>
             <tr><td>icon</td> <td>图标</td> <td>String</td></tr>
-            <tr><td>iconSize</td> <td>图标尺寸大小</td><td></td> <td>Number</td></tr>
+            <tr><td>iconSize</td> <td>图标尺寸大小</td><td>Number</td></tr>
             <tr><td>iconColor</td> <td>图标颜色，不写默认和字体颜色一致，支持十六进制</td> <td>String</td></tr>
             </tbody>
         </table>
