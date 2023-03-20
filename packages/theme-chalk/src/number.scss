@@ -4,41 +4,4 @@
 @include b(number) {
     width: 100%;
     height: 100%;
-    text-align: center;
-    font-size: $--font-size-base;
-    font-weight: normal;
-    color: $--color-primary;
-
-    @include m(small) {
-        font-size: $--font-size-extra-small;
-    }
-    @include m(large) {
-        font-size: $--font-size-large;
-    }
-    @include when(bold){
-        font-weight: bold;
-    }
-    @include when(border){
-        border: $--border-width-base $--border-style-base $--color-primary-light-7;
-    }
-    @include m(black) {
-        color: $--color-black;
-    }
-    @include m(success) {
-        color: $--color-success;
-    }
-    @include m(warning) {
-        color: $--color-warning;
-    }
-    @include m(danger) {
-        color: $--color-danger;
-    }
-    @include m(info) {
-        color: $--color-info;
-    }
-
-    &:hover {
-        text-shadow: $--box-shadow-base;
-    }
-
 }
