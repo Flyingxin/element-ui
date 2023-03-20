@@ -81,8 +81,8 @@ import { ElPageHeader } from './page-header'
 import { ElAvatar } from './avatar'
 import { ElDrawer } from './drawer'
 import { ElStatistic } from './statistic'
-
-import { ElQrcode } from './qrcode'
+import { ElQrcode } from './qrcode'
+import { ElNumber } from './number'
 
 export interface InstallationOptions {
   locale: any,
@@ -729,3 +729,6 @@ export class Result extends ElResult {}
 
 /** Qrcode Component */
 export class Qrcode extends ElQrcode {}
+
+/** Number Component */
+export class Number extends ElNumber {}
