@@ -83,6 +83,8 @@ import { ElDrawer } from './drawer'
 import { ElStatistic } from './statistic'
 import { ElQrcode } from './qrcode'
 import { ElNumber } from './number'
+import { ElNotice } from './notice'
+import { ElWaterMark } from './water-mark'
 
 export interface InstallationOptions {
   locale: any,
@@ -732,3 +734,9 @@ export class Qrcode extends ElQrcode {}
 
 /** Number Component */
 export class Number extends ElNumber {}
+
+/** Notice Component */
+export class Notice extends ElNotice {}
+
+/** WaterMark Component */
+export class WaterMark extends ElWaterMark {}
