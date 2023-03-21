@@ -89,21 +89,38 @@
             <tr><td>boder</td> <td>边框</td> <td>Boolean</td></tr>
             <tr><td>icon</td> <td>图标</td> <td>String</td></tr>
             <tr><td>iconSize</td> <td>图标尺寸大小</td><td>Number</td></tr>
-            <tr><td>iconColor</td> <td>图标颜色，不写默认和字体颜色一致，支持十六进制</td> <td>String</td></tr>
+            <tr><td>iconColor</td> <td>图标颜色，不写默认和字体颜色一致，支持英文/十六进制</td> <td>String</td></tr>
             </tbody>
         </table>
-# el-number
+# el-notice
 - No.9
         <table border="1" rules="all"  width="700px">
             <thead><th colspan="3" center>通知栏组件</th></thead>
             <tbody>
-            <tr><td>text</td> <td>内容，仅支持单挑消息</td><td>String</td></tr>
-            <tr><td>delay</td> <td>展示时间为延迟时间的一半，默认为3s</td> <td>String/Number</td></tr>
+            <tr><td>text</td> <td>内容，仅支持单条消息</td><td>String</td></tr>
+            <tr><td>delay</td> <td>展示时间为延迟时间的一半，默认为10s</td> <td>String/Number</td></tr>
             <tr><td>infinite</td> <td>循环播放</td> <td>Boolean</td></tr>
             <tr><td>fontSize</td> <td>字体大小，默认14px</td> <td>String</td></tr>
-            <tr><td>color</td> <td>字体颜色，支持16进制</td> <td>String</td></tr>
+            <tr><td>color</td> <td>字体颜色，支持英文/16进制</td> <td>String</td></tr>
             <tr><td>backgroundColor</td> <td>通知栏背景颜色</td> <td>String</td></tr>
             <tr><td>icon</td> <td>图标</td> <td>String</td></tr>
+            </tbody>
+        </table>
+# el-water-mark
+- No.10
+        <table border="1" rules="all"  width="700px">
+            <thead><th colspan="3" center>水印组件</th></thead>
+            <tbody>
+            <tr><td>content</td> <td>内容(必填)</td><td>String</td></tr>
+            <tr><td>color</td> <td>水印字体颜色，支持英文/16进制</td> <td>String</td></tr>
+            <tr><td>fontSize</td> <td>水印字体大小，默认14px</td> <td>String</td></tr>      
+            <tr><td>rotate</td> <td>水印字体旋转，默认-30度 (+则为顺时针方向旋转)</td> <td>Number</td></tr> 
+            <tr><td>opacity</td> <td>水印字体透明度，默认0.5(介于[0,1])</td> <td>Number</td></tr>                  
+            <tr><td>markWidth</td> <td>单个水印宽度,单位px</td> <td>String</td></tr>
+            <tr><td>markHeight</td> <td>单个水印宽度,单位px</td> <td>String</td></tr>
+            <tr><td>gapX</td> <td>水印字体水平间隔,单位px</td> <td>String</td></tr>
+            <tr><td>gapY</td> <td>水印字体垂直间隔,单位px</td> <td>String</td></tr>
+            <tr><td>borderRadius</td> <td>边框,单位px</td> <td>String</td></tr>
             </tbody>
         </table>
 # 修改源码步骤
