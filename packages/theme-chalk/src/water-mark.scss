@@ -1,0 +1,41 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(water-mark) {
+    height: 100%;
+    border: $--notice-border;
+    border-radius: $--waterMark-border-radius;
+    cursor: pointer;
+    overflow: hidden;
+
+    &:hover {
+        border: $--border-base;
+    }
+
+    ul {
+        float: left;
+        display: flex;
+        justify-content: space-between;
+        align-content: space-between;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        height: 0;
+        box-sizing: border-box;
+    }
+
+    @include e(inner) {
+        float: left;
+        display: inline-block;
+        cursor: default;
+        user-select: none;
+        padding: $--waterMark-padding;
+
+        @include m(content) {
+            display: inline-block;
+            transform: rotateZ(-30deg);
+            color: lightgray;
+            opacity: $--waterMark-opacity,
+        }
+    }
+}

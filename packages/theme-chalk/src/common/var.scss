@@ -384,6 +384,11 @@ $--message-warning-font-color: $--color-warning !default;
 /// color||Color|0
 $--message-danger-font-color: $--color-danger !default;
 
+/* Notice
+-------------------------- */
+$--notice-padding: 10px 0 !default;
+$--notice-border: $--border-width-base $--border-style-base $--color-white !default;
+
 /* Notification
 -------------------------- */
 $--notification-width: 330px !default;
@@ -968,6 +973,14 @@ $--empty-padding: 40px 0 !default;
 $--empty-image-width: 160px !default;
 $--empty-description-margin-top: 20px !default;
 $--empty-bottom-margin-top: 20px !default;
+
+/* WaterMark
+-------------------------- */
+$--waterMark-padding: 30px !default;
+$--waterMark-rotateZ-base: rotateZ(-30deg) !default;
+$--waterMark-opacity: .5 !default;
+$--waterMark-border-hover: $--border-width-base $--border-style-base $--color-primary  !default;
+$--waterMark-border-radius: 1% !default;
 
 /* Descriptions
 -------------------------- */

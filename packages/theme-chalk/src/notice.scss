@@ -1,0 +1,40 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(notice) {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    padding: $--notice-padding;
+    border: $--notice-border;
+
+    &:hover {
+        border: $--border-base;
+    }
+
+    @include e(icon) {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    @include e(inner) {
+        margin: 0;
+        color: $--color-primary;
+        font-size: $--font-size-base;
+        animation: translateX 10s linear;
+
+        @include when(infinite){
+            animation-iteration-count: infinite;
+        }
+    }
+}
+@keyframes translateX {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }

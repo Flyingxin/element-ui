@@ -35,6 +35,7 @@
   background: $--popup-modal-background-color;
 }
 
+// el-pipup-parent--hidden
 @include b(popup-parent) {
   @include m(hidden) {
     overflow: hidden;
