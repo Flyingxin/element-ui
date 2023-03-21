@@ -91,6 +91,8 @@ import DescriptionsItem from '../packages/descriptions-item/index.js';
 import Result from '../packages/result/index.js';
 import Qrcode from '../packages/qrcode/index.js';
 import Number from '../packages/number/index.js';
+import Notice from '../packages/notice/index.js';
+import WaterMark from '../packages/water-mark/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -181,6 +183,8 @@ const components = [
   Result,
   Qrcode,
   Number,
+  Notice,
+  WaterMark,
   CollapseTransition
 ];
 
@@ -311,5 +315,7 @@ export default {
   DescriptionsItem,
   Result,
   Qrcode,
-  Number
+  Number,
+  Notice,
+  WaterMark
 };
