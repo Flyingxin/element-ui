@@ -57,7 +57,8 @@
     <p>② 新增多种特效，如抽屉式、旋转式、翻转式、渐变式等</p>
     <p>③ rotate模式下支持不高于6张广告的走马灯</p>
     <p>④ 已经修复，目前rotate模式下支持定时切换功能</p>
-
+    <p>⑤ `新增backface属性`</p>
+        图片背面显示功能,默认关闭
 # el-qrcode
 - No.6 
         <table border="1" rules="all"  width="700px">
